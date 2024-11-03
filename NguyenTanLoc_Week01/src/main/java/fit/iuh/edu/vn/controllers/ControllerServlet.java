@@ -88,6 +88,9 @@ public class ControllerServlet extends HttpServlet {
             req.getServletContext().setAttribute("accounts", accountServices.findAll());
             req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
         }
+        else if(action.equalsIgnoreCase("grant")){
+            String emailGrant = req.getParameter("emailGrant");
+        }
 
     }
 }

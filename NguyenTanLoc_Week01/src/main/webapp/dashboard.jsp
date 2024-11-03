@@ -146,6 +146,13 @@
                     <input type="submit" value="Delete">
                 </form>
             </td>
+            <td>
+                <form action="control-servlet" method="post">
+                    <input type="hidden" name="action" value="grant">
+                    <input type="hidden" name="emailGrant" value="<%= acc.getEmail() %>">
+                    <input type="submit" value="Grant">
+                </form>
+            </td>
         </tr>
         <% } %>
         </tbody>
