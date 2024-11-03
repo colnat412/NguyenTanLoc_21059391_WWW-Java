@@ -3,7 +3,28 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
+    <persistence-unit name="lab-week-01">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>fit.iuh.edu.vn.entities.Account</class>
+        <class>fit.iuh.edu.vn.entities.GrantAccess</class>
+        <class>fit.iuh.edu.vn.entities.Log</class>
+        <class>fit.iuh.edu.vn.entities.Role</class>
+        <class>fit.iuh.edu.vn.enums.Status</class>
+        <class>fit.iuh.edu.vn.enums.GrantAccessStatus</class>
+        <properties>
+            <!-- MariaDB connection properties -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/lab-week-01?createDatabaseIfNotExist=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="sapassword"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+
+            <!-- Hibernate specific properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
 
     </persistence-unit>
 </persistence>
