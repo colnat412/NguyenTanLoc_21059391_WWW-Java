@@ -1,15 +1,14 @@
-<%@ page import="fit.iuh.edu.vn.entities.Account" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="fit.iuh.edu.vn.entities.Account" %><%--
   Created by IntelliJ IDEA.
   User: TANLOC
   Date: 11/3/2024
-  Time: 15:13
+  Time: 15:48
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,34 +58,9 @@
         .container .logout:hover {
             background-color: #e53935;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-            text-align: left;
-        }
-        table th, table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-        table th {
-            background-color: #f2f2f2;
-        }
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        table tr:hover {
-            background-color: #f1f1f1;
-        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center">Dashboard</h1>
-    <form style="display: flex; justify-content: center; align-items: center;" action="control-servlet" method="post">
-        <input type="hidden" name="action" value="logout">
-        <input style="width: 100px;" type="submit" value="Logout">
-    </form>
     <div class="container">
         <% Account account = (Account) request.getServletContext().getAttribute("account");
             Boolean isAdmin = (Boolean) request.getServletContext().getAttribute("isAdmin");
@@ -108,35 +82,11 @@
             <input type="hidden" name="action" value="log">
             <input type="submit" value="View logs" class="log">
         </form>
-        <%--    <% if (isAdmin)  { %>--%>
-        <%--    <form action="control-servlet" method="get">--%>
-        <%--        <input type="hidden" name="action" value="viewAccounts">--%>
-        <%--        <input type="submit" value="View Accounts" class="log">--%>
-        <%--    </form>--%>
-        <%--    <% } %>--%>
         <form action="control-servlet" method="post">
             <input type="hidden" name="action" value="logout">
             <input type="submit" value="Logout" class="log">
         </form>
     </div>
-    <% List<Account> accounts = (List<Account>) request.getServletContext().getAttribute("accounts");%>
-    <table>
-        <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for (Account acc : accounts) { %>
-            <tr>
-                <td><%= acc.getFullName() %></td>
-                <td><%= acc.getEmail() %></td>
-                <td><%= acc.getPhone() %></td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
 </body>
+
 </html>

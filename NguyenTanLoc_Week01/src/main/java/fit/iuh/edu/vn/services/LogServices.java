@@ -19,6 +19,10 @@ public class LogServices {
         logRepository.update(log);
     }
 
+    public Log findLogByAccountId(String accountId){
+        return logRepository.findLogByAccountId(accountId);
+    }
+
     public Log findIdLast(){
         return logRepository.findIdLast();
     }

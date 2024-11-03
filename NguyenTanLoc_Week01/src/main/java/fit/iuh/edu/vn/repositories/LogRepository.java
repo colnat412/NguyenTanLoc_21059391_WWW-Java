@@ -37,6 +37,12 @@ public class LogRepository {
         }
     }
 
+    public Log findLogByAccountId(String accountId) {
+        return entityManager.createNamedQuery("Log.findByAccountId", Log.class)
+                .setParameter("accountId", accountId)
+                .getSingleResult();
+    }
+
     public Log findIdLast() {
         return entityManager.createNamedQuery("Log.findIdLast", Log.class)
                 .setMaxResults(1)

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Table(name = "log")
 @NamedQueries({
         @NamedQuery(name = "Log.findAll", query = "SELECT l from Log l"),
-        @NamedQuery(name = "Log.findById", query = "SELECT l from Log l where l.id = :id"),
+        @NamedQuery(name = "Log.findByAccountId", query = "SELECT l from Log l where l.accountId = :accountId"),
         @NamedQuery(name = "Log.findIdLast", query = "SELECT l from Log l order by l.id desc"),
 })
 public class Log {
