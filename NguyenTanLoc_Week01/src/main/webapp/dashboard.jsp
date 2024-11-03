@@ -12,5 +12,9 @@
 </head>
 <body>
     <h1>Dashboard</h1>
+    <form action="control-servlet" method="post">
+        <input type="hidden" name="action" value="logout">
+        <input style="width: 100px;" type="submit" value="Logout">
+    </form>
 </body>
 </html>

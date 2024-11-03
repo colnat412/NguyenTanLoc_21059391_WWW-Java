@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NamedQueries({
         @NamedQuery(name = "Log.findAll", query = "SELECT l from Log l"),
         @NamedQuery(name = "Log.findById", query = "SELECT l from Log l where l.id = :id"),
-        @NamedQuery(name = "Log.findIdLast", query = "SELECT l from Log l order by l.id desc")
+        @NamedQuery(name = "Log.findIdLast", query = "SELECT l from Log l order by l.id desc"),
 })
 public class Log {
     @Id
@@ -22,12 +22,12 @@ public class Log {
     @Column(name = "note")
     private String note;
     @Column(name = "account_id")
-    private long accountId;
+    private String accountId;
 
     public Log() {
     }
 
-    public Log(LocalDateTime loginTime, LocalDateTime logoutTime, String note, long accountId) {
+    public Log(LocalDateTime loginTime, LocalDateTime logoutTime, String note, String accountId) {
         this.loginTime = loginTime;
         this.logoutTime = logoutTime;
         this.note = note;
@@ -66,11 +66,11 @@ public class Log {
         this.note = note;
     }
 
-    public long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
