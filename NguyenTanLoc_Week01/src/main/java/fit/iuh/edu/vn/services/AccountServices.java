@@ -12,6 +12,18 @@ public class AccountServices {
         accountRepository = new AccountRepository();
     }
 
+    public void create(Account account){
+        accountRepository.create(account);
+    }
+
+    public void update(Account account){
+        accountRepository.update(account);
+    }
+
+    public void delete(Account account){
+        accountRepository.delete(account);
+    }
+
     public List<Account> findAll(){
         return accountRepository.findAll();
     }

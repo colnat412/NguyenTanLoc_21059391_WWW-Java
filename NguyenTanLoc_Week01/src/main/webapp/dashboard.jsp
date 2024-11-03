@@ -1,5 +1,6 @@
 <%@ page import="fit.iuh.edu.vn.entities.Account" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="fit.iuh.edu.vn.entities.Role" %><%--
   Created by IntelliJ IDEA.
   User: TANLOC
   Date: 11/3/2024
@@ -83,13 +84,10 @@
 </head>
 <body>
     <h1 style="text-align: center">Dashboard</h1>
-    <form style="display: flex; justify-content: center; align-items: center;" action="control-servlet" method="post">
-        <input type="hidden" name="action" value="logout">
-        <input style="width: 100px;" type="submit" value="Logout">
-    </form>
     <div class="container">
         <% Account account = (Account) request.getServletContext().getAttribute("account");
             Boolean isAdmin = (Boolean) request.getServletContext().getAttribute("isAdmin");
+            List<Role> roles = (List<Role>) request.getServletContext().getAttribute("roles");
         %>
         <h1>Profile Information</h1>
         <div class="info">
@@ -104,16 +102,18 @@
             <label>Phone:</label>
             <span><%= account.getPhone() %></span>
         </div>
+        <div class="info">
+            <label>Roles:</label>
+            <span>
+                <% for (Role role : roles) { %>
+                        <%= role.getRoleName() %> <br>
+                <% } %>
+            </span>
+        </div>
         <form action="control-servlet" method="get">
             <input type="hidden" name="action" value="log">
             <input type="submit" value="View logs" class="log">
         </form>
-        <%--    <% if (isAdmin)  { %>--%>
-        <%--    <form action="control-servlet" method="get">--%>
-        <%--        <input type="hidden" name="action" value="viewAccounts">--%>
-        <%--        <input type="submit" value="View Accounts" class="log">--%>
-        <%--    </form>--%>
-        <%--    <% } %>--%>
         <form action="control-servlet" method="post">
             <input type="hidden" name="action" value="logout">
             <input type="submit" value="Logout" class="log">
@@ -122,20 +122,32 @@
     <% List<Account> accounts = (List<Account>) request.getServletContext().getAttribute("accounts");%>
     <table>
         <thead>
-            <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-            </tr>
+        <tr>
+            <th></th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Edit</th>
+        </tr>
         </thead>
         <tbody>
-            <% for (Account acc : accounts) { %>
-            <tr>
-                <td><%= acc.getFullName() %></td>
-                <td><%= acc.getEmail() %></td>
-                <td><%= acc.getPhone() %></td>
-            </tr>
-            <% } %>
+        <% for (Account acc : accounts) { %>
+        <tr>
+            <td>
+                <input type="checkbox" name="selectedAccounts" value="<%= acc.getEmail() %>">
+            </td>
+            <td><%= acc.getFullName() %></td>
+            <td><%= acc.getEmail() %></td>
+            <td><%= acc.getPhone() %></td>
+            <td>
+                <form action="control-servlet" method="post">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="emailDelete" value="<%= acc.getEmail() %>">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        <% } %>
         </tbody>
     </table>
 </body>

@@ -22,6 +22,42 @@ public class AccountRepository {
                 .getResultList();
     }
 
+    public void create(Account account){
+        try {
+            entityTransaction.begin();
+            entityManager.persist(account);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Account account){
+        try {
+            entityTransaction.begin();
+            entityManager.merge(account);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Account account){
+        try {
+            entityTransaction.begin();
+            entityManager.remove(account);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
     public Account findAccountByEmail(String email){
         return entityManager.createNamedQuery("Account.findByEmail", Account.class)
                 .setParameter("email", email)

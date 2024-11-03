@@ -66,7 +66,8 @@ public class ControllerServlet extends HttpServlet {
                 req.setAttribute("message", "Incorrect email or password");
                 req.getRequestDispatcher("index.jsp").forward(req, resp);
             }
-        }else if(action.equalsIgnoreCase("logout")){
+        }
+        else if(action.equalsIgnoreCase("logout")){
             Log log = logServices.findIdLast();
             log.setLogoutTime(LocalDateTime.now());
             log.setNote("Logout successfully");
@@ -74,5 +75,13 @@ public class ControllerServlet extends HttpServlet {
             req.getServletContext().removeAttribute("account");
             resp.sendRedirect("index.jsp");
         }
+        else if(action.equalsIgnoreCase("delete")){
+            String emailDelete =req.getParameter("emailDelete");
+            Account account = accountServices.findAccountByEmail(emailDelete);
+            accountServices.delete(account);
+            req.getServletContext().setAttribute("accounts", accountServices.findAll());
+            req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
+        }
+
     }
 }

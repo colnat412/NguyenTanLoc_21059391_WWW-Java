@@ -24,7 +24,7 @@ public class Role {
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE)
     private List<GrantAccess> grantAccesses;
 
     public Role() {

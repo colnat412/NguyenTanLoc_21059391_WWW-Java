@@ -29,7 +29,7 @@ public class Account {
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE)
     private List<GrantAccess> grantAccesses;
 
     public Account() {
