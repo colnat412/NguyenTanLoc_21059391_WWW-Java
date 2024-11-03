@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class LogRepository {
     private EntityManager entityManager;
     private EntityTransaction entityTransaction;
@@ -37,10 +39,21 @@ public class LogRepository {
         }
     }
 
-    public Log findLogByAccountId(String accountId) {
+    public void delete(Log log) {
+        try {
+            entityTransaction.begin();
+            entityManager.remove(log);
+            entityTransaction.commit();
+        } catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public List<Log> findLogByAccountId(String accountId) {
         return entityManager.createNamedQuery("Log.findByAccountId", Log.class)
                 .setParameter("accountId", accountId)
-                .getSingleResult();
+                .getResultList();
     }
 
     public Log findIdLast() {

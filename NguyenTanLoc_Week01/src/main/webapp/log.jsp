@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<h1>Logs</h1>
+    <h1>Logs</h1>
     <table>
         <thead>
         <tr>

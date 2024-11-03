@@ -4,6 +4,8 @@ import fit.iuh.edu.vn.entities.Log;
 import fit.iuh.edu.vn.repositories.AccountRepository;
 import fit.iuh.edu.vn.repositories.LogRepository;
 
+import java.util.List;
+
 public class LogServices {
     private LogRepository logRepository;
 
@@ -19,7 +21,7 @@ public class LogServices {
         logRepository.update(log);
     }
 
-    public Log findLogByAccountId(String accountId){
+    public List<Log> findLogByAccountId(String accountId){
         return logRepository.findLogByAccountId(accountId);
     }
 
